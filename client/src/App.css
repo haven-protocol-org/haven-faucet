@@ -1,6 +1,31 @@
 .App {
+  height:100vh;
   text-align: center;
+  background-color:black;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+input[type="text"]{ 
+  padding: 8px 8px; 
+  line-height: 28px; 
+  width: 100%;
+  margin: 10px 10px;
+}
+
+input[type="submit"]{ 
+  padding: 8px 8px; 
+  font-size: 24px;
+  line-height: 28px; 
+  width: 50%;
+}
+
+.error {
+
+  color:red;
+  font-size: 12px;
+}
+
 
 .App-logo {
   height: 40vmin;
@@ -14,8 +39,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color:black;
   display: flex;
   flex-direction: column;
   align-items: center;

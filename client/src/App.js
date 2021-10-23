@@ -4,33 +4,57 @@ import './App.css';
 
 class App extends Component {
 state = {
-    data: null
+    isFetching:false,
+    serverStatus:"",
+    errorMessage:"Test",
+    address:""
   };
 
-  componentDidMount() {
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
-  }
+
     // fetching the GET route from the Express server which matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
+    const response = await fetch('/claim',{
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({address:this.state.address})});
+
+
     const body = await response.json();
 
     if (response.status !== 200) {
-      throw Error(body.message) 
+      this.setState({errorMessage: body.message});
     }
     return body;
   };
+
+
+  handleChange(event) {
+    this.setState({address: event.target.value});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.callBackendAPI();
+    
+  }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Haven Stagenet Faucet</h1>
         </header>
-        <p className="App-intro">{this.state.data}</p>
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <label>
+          Name:
+          <input placeholder="your Haven Stagenet address" type="text" value={this.state.address} onChange={(e) => this.handleChange(e)} />
+        </label>
+        <input type="submit" value="Claim" />
+        <div className="error">{this.state.errorMessage}</div>
+      </form>
+        
       </div>
     );
   }

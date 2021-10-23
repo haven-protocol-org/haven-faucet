@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "haven-wallet-core": "^1.4.99",
+    "node-cache": "^5.1.2"
   }
 }
